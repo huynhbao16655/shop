@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Shop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.App.Starting" parent ="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#fff</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon1</item>
+        <item name="windowSplashScreenAnimationDuration">10600</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shop</item>
+    </style>
+</resources>
