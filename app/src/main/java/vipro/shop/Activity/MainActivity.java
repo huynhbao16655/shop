@@ -1,17 +1,15 @@
 package vipro.shop.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import vipro.shop.Fragment.CartFragment;
 import vipro.shop.Fragment.HomeFragment;
@@ -51,27 +49,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     private void setOnClickBottomView() {
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.mn_home:
-                        fm = new HomeFragment(getApplicationContext());
-                        break;
-                    case R.id.mn_cart:
-                        fm = new CartFragment(getApplicationContext());
-                        break;
-                    case R.id.mn_account:
-                        fm = new LoginSignupFragment(getApplicationContext());
-                        break;
-                    default:
-                        fm = new CartFragment(getApplicationContext());
-                }
-                loadFragment(fm);
-                return true;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            switch (id) {
+                case R.id.mn_home:
+                    fm = new HomeFragment(getApplicationContext());
+                    break;
+                case R.id.mn_cart:
+                    fm = new CartFragment(getApplicationContext());
+                    break;
+                case R.id.mn_account:
+                    fm = new LoginSignupFragment(getApplicationContext());
+                    break;
+                default:
+                    fm = new CartFragment(getApplicationContext());
             }
+            loadFragment(fm);
+            return true;
         });
     }
 

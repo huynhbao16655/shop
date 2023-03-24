@@ -11,4 +11,5 @@
         <item name="windowSplashScreenAnimationDuration">10600</item>
         <item name="postSplashScreenTheme">@style/Theme.Shop</item>
     </style>
+
 </resources>

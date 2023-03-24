@@ -63,15 +63,12 @@ public class RecentlyAdapter extends RecyclerView.Adapter<RecentlyAdapter.Recent
             holder.productPriceRecently.setText("");
             holder.unitPriceRecently.setText("");
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context, ProductDetailActivity.class);
-                intent.putExtra("productDetail",productModel);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, ProductDetailActivity.class);
+            intent.putExtra("productDetail",productModel);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
 
-            }
         });
 
     }

@@ -58,15 +58,12 @@ public class ProductOfTypeAdapter extends RecyclerView.Adapter<ProductOfTypeAdap
             holder.priceProductOfType.setText("");
             holder.priceSaleProductOfType.setText(Support.ConvertMoney(productModel.getPrice()));
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context, ProductDetailActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("productDetail",productModel);
-                context.startActivity(intent);
-                ((Activity)context).finish();
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, ProductDetailActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("productDetail",productModel);
+            context.startActivity(intent);
+            ((Activity)context).finish();
         });
     }
 

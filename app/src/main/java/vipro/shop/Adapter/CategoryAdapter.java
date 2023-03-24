@@ -46,16 +46,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         CategoryModel categoryModel = categoryList.get(position);
         Picasso.get().load(Server.urlImage + categoryModel.getImage()).into(holder.categoryImage);
         holder.categoryName.setText(categoryModel.getName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context, ProductsOfTypeActivity.class);
-                intent.putExtra("typeProduct",categoryModel);
-                intent.putExtra("check",true);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, ProductsOfTypeActivity.class);
+            intent.putExtra("typeProduct",categoryModel);
+            intent.putExtra("check",true);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

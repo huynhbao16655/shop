@@ -115,27 +115,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void loadImageSlider() {
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlBanner, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlBanner, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
 
-                        listImage.add(response.getString(i));
-                        //Log.d("duy", "onResponse: "+response.getString(i));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    listImage.add(response.getString(i));
+                    //Log.d("duy", "onResponse: "+response.getString(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                sliderAdapter.notifyDataSetChanged();
-                autoSliderImage();
-
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            sliderAdapter.notifyDataSetChanged();
+            autoSliderImage();
 
-            }
+        }, error -> {
+
         });
         queue.add(jsonArrayRequest);
     }

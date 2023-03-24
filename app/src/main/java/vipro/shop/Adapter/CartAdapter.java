@@ -3,7 +3,6 @@ package vipro.shop.Adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -44,11 +43,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CartViewHolder(LayoutInflater.from(context).inflate(layout, null));
     }
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CartModel cart = lstCart.get(position);
 
-        long price = 0;
+        long price;
         if (cart.getProductModel().getPrice_discounted() > 0)
             price = cart.getProductModel().getPrice_discounted();
         else
@@ -59,41 +59,35 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.price.setText(Support.ConvertMoney(price));
         holder.name.setText(cart.getProductModel().getName());
         long finalPrice = price;
-        holder.quantity.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getAction() != KeyEvent.ACTION_DOWN)
-                    return true;
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    if(holder.quantity.getText().toString().equals(""))
-                        return false;
-                    int quantity = Integer.parseInt(holder.quantity.getText().toString());
-                    if (quantity == 0) {
-                        lstCart.remove(lstCart.get(position));
-                        CartFragment.updateCart(lstCart);
-                        notifyDataSetChanged();
-                    } else {
-                        int quantityRemain=cart.getQuantityRemain()+cart.getQuantity();
-                        if(quantity>quantityRemain)
-                        {
-                            Toast.makeText(context,"Không đủ hàng.",Toast.LENGTH_SHORT).show();
-                            return false;
-                        }
-                        holder.subtotal.setText(Support.ConvertMoney(quantity * finalPrice));
-                        lstCart.get(position).setQuantity(quantity);
-                        lstCart.get(position).setQuantityRemain(quantityRemain-quantity);
-                        CartFragment.updateCart(lstCart);
-                    }
-                }
-                return false;
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                confirmDetele(position);
+        holder.quantity.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() != KeyEvent.ACTION_DOWN)
                 return true;
+            if (i == KeyEvent.KEYCODE_ENTER) {
+                if(holder.quantity.getText().toString().equals(""))
+                    return false;
+                int quantity = Integer.parseInt(holder.quantity.getText().toString());
+                if (quantity == 0) {
+                    lstCart.remove(lstCart.get(position));
+                    CartFragment.updateCart(lstCart);
+                    notifyDataSetChanged();
+                } else {
+                    int quantityRemain=cart.getQuantityRemain()+cart.getQuantity();
+                    if(quantity>quantityRemain)
+                    {
+                        Toast.makeText(context,"Không đủ hàng.",Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    holder.subtotal.setText(Support.ConvertMoney(quantity * finalPrice));
+                    lstCart.get(position).setQuantity(quantity);
+                    lstCart.get(position).setQuantityRemain(quantityRemain-quantity);
+                    CartFragment.updateCart(lstCart);
+                }
             }
+            return false;
+        });
+        holder.itemView.setOnLongClickListener(view -> {
+            confirmDetele(position);
+            return true;
         });
 
 
@@ -105,21 +99,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         builder.setTitle("Thông báo!");
         builder.setMessage("Bạn có muốn xoá sản phẩm " + cartModel.getProductModel().getName() + "?");
         builder.setIcon(R.drawable.icon);
-        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deleteCartModel(position);
-            }
-        });
-        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setPositiveButton("Có", (dialogInterface, i) -> deleteCartModel(position));
+        builder.setNegativeButton("Không", (dialogInterface, i) -> {
 
-            }
         });
         builder.show();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void deleteCartModel(int position) {
         lstCart.remove(position);
         CartFragment.updateCart(lstCart);

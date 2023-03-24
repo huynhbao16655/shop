@@ -1,5 +1,6 @@
 package vipro.shop.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,14 +20,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,7 +68,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         String cart = sharedPreferencesCart.getString("item_cart", "");
         CartModel[] cartModels = new Gson().fromJson(cart, CartModel[].class);
         if (cartModels != null)
-            listCart = new ArrayList<CartModel>(Arrays.asList(cartModels));
+            listCart = new ArrayList<>(Arrays.asList(cartModels));
         else
             listCart = new ArrayList<>();
     }
@@ -115,6 +113,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         unitPriceDiscountProductDetail.setPaintFlags(unitPriceDiscountProductDetail.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -151,15 +150,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         for (CartModel item : listCart) {
             if (item.getProductModel().getCode().equals(productModel.getCode())) {
                 check = true;
-                CartModel cartModel = item;
-                if (quantity > cartModel.getQuantityRemain()) {
+                if (quantity > item.getQuantityRemain()) {
                     Toast.makeText(this, "Không đủ hàng.", Toast.LENGTH_SHORT).show();
                     return -1;
                 }
                 listCart.remove(item);
-                cartModel.setQuantityRemain(cartModel.getQuantityRemain() - quantity);
-                cartModel.setQuantity(cartModel.getQuantity() + quantity);
-                listCart.add(cartModel);
+                item.setQuantityRemain(item.getQuantityRemain() - quantity);
+                item.setQuantity(item.getQuantity() + quantity);
+                listCart.add(item);
                 break;
             }
         }
@@ -173,13 +171,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         Toast.makeText(this, "Thêm sản phẩm thành công.", Toast.LENGTH_SHORT).show();
         SharedPreferences.Editor editorCart = sharedPreferencesCart.edit();
         editorCart.putString("item_cart", new Gson().toJson(listCart));
-        editorCart.commit();
+        editorCart.apply();
         return 1;
     }
 
-    private int dpToPx(int dp) {
+    private int dpToPx() {
         Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, r.getDisplayMetrics()));
     }
 
     private void setRecyclerAdapter() {
@@ -187,46 +185,40 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         lstSimilarProducts = new ArrayList<>();
         similarProductAdapter = new ProductOfTypeAdapter(this, R.layout.item_product_of_type, lstSimilarProducts);
         recycleviewSimilarProduct.setLayoutManager(new GridLayoutManager(this,2));
-        recycleviewSimilarProduct.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(2), false));
+        recycleviewSimilarProduct.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(), false));
         recycleviewSimilarProduct.setAdapter(similarProductAdapter);
     }
 
     private void loadDataSimilarProduct() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsOfType + "?type_code=" + productModel.getType_code(), new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                boolean check = false;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        if (productModel.getCode().equals(jsonObject.getString("code")))
-                            continue;
-                        lstSimilarProducts.add(
-                                new ProductModel(
-                                        jsonObject.getString("code"),
-                                        jsonObject.getString("name"),
-                                        jsonObject.getLong("price"),
-                                        jsonObject.getInt("quantity"),
-                                        jsonObject.getLong("price_discounted"),
-                                        jsonObject.getString("description"),
-                                        jsonObject.getString("image"),
-                                        jsonObject.getString("date_update"),
-                                        jsonObject.getString("type_code")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsOfType + "?type_code=" + productModel.getType_code(), response -> {
+            boolean check = false;
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    if (productModel.getCode().equals(jsonObject.getString("code")))
+                        continue;
+                    lstSimilarProducts.add(
+                            new ProductModel(
+                                    jsonObject.getString("code"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getLong("price"),
+                                    jsonObject.getInt("quantity"),
+                                    jsonObject.getLong("price_discounted"),
+                                    jsonObject.getString("description"),
+                                    jsonObject.getString("image"),
+                                    jsonObject.getString("date_update"),
+                                    jsonObject.getString("type_code")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                if (lstSimilarProducts.size() == 0)
-                    titleSimilarProduct.setText("");
-                similarProductAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            if (lstSimilarProducts.size() == 0)
+                titleSimilarProduct.setText("");
+            similarProductAdapter.notifyDataSetChanged();
+        }, error -> {
 
-            }
         });
         queue.add(jsonArrayRequest);
     }

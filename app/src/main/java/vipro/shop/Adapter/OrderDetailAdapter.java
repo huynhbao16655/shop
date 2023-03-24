@@ -1,5 +1,6 @@
 package vipro.shop.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     public ViewOrderDetail onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewOrderDetail(LayoutInflater.from(context).inflate(layout, null));
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewOrderDetail holder, int position) {
         OrderDetailModel orderDetailModel = orderDetailModelArrayList.get(position);

@@ -17,12 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,12 +60,7 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
         holder.codeOrderOfCustomer.setText(orderModel.getCode());
         holder.dateOrderOfCustomer.setText(orderModel.getCreateDate());
         holder.totalOrderOfCustomer.setText(Support.ConvertMoney(orderModel.getTotal()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogOrderDeatail(position);
-            }
-        });
+        holder.itemView.setOnClickListener(view -> openDialogOrderDeatail(position));
     }
 
     private void openDialogOrderDeatail(int position) {
@@ -84,36 +76,25 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
     }
 
     private void getDataOrderDetail(int position) {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderDetailByCode + "?code_order=" + orderModelArrayList.get(position).getCode(), new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject object=response.getJSONObject(i);
+        @SuppressLint("NotifyDataSetChanged") JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderDetailByCode + "?code_order=" + orderModelArrayList.get(position).getCode(), response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject object=response.getJSONObject(i);
 
-                        orderDetailModelArrayList.add(new OrderDetailModel(object.getString("code_order"),object.getString("name_product"),object.getLong("price"),object.getInt("quantity"),object.getLong("total")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    orderDetailModelArrayList.add(new OrderDetailModel(object.getString("code_order"),object.getString("name_product"),object.getLong("price"),object.getInt("quantity"),object.getLong("total")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                orderDetailAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            orderDetailAdapter.notifyDataSetChanged();
+        }, error -> {
 
-            }
         });
         Volley.newRequestQueue(context).add(jsonArrayRequest);
     }
 
     private void setClick() {
-        btnCancelOrderDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        btnCancelOrderDetail.setOnClickListener(view -> dialog.dismiss());
     }
 
     private void setControl() {
@@ -121,15 +102,15 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
         btnCancelOrderDetail = dialog.findViewById(R.id.btnCancelOrderDetail);
     }
 
-    private int dpToPx(int dp) {
+    private int dpToPx() {
         Resources r = context.getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, r.getDisplayMetrics()));
     }
 
     private void setAdapterOrderDetail() {
         orderDetailModelArrayList = new ArrayList<>();
         orderDetailAdapter = new OrderDetailAdapter(context, R.layout.item_order_detail, orderDetailModelArrayList);
-        recycleviewOrderDetail.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(8), false));
+        recycleviewOrderDetail.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(), false));
         recycleviewOrderDetail.setAdapter(orderDetailAdapter);
         recycleviewOrderDetail.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
     }

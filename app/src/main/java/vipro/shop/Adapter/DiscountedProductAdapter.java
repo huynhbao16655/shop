@@ -50,15 +50,12 @@ public class DiscountedProductAdapter extends RecyclerView.Adapter<DiscountedPro
         holder.discountName.setText(productModel.getName());
         holder.discountPrice.setText(Support.ConvertMoney(productModel.getPrice()));
         holder.discountSalePrice.setText(Support.ConvertMoney(productModel.getPrice_discounted()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(context, ProductDetailActivity.class);
-                intent.putExtra("productDetail",productModel);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, ProductDetailActivity.class);
+            intent.putExtra("productDetail",productModel);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
 
-            }
         });
     }
 

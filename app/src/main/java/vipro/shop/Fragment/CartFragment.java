@@ -1,5 +1,6 @@
 package vipro.shop.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     Context context;
     static ArrayList<CartModel> lstCart = null;
     RecyclerView recyclerView;
+    @SuppressLint("StaticFieldLeak")
     static TextView txttotalquantity_cart, txttotalpay_cart;
     ImageView backCart;
     Button btnPay;
@@ -64,7 +66,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         CartModel[] cartModels = new Gson().fromJson(cart, CartModel[].class);
         if (cartModels != null)
-            lstCart = new ArrayList<CartModel>(Arrays.asList(cartModels));
+            lstCart = new ArrayList<>(Arrays.asList(cartModels));
         else
             lstCart = new ArrayList<>();
         setControl(view);
@@ -75,6 +77,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void setData() {
         int sumQuantity = 0;
         long total = 0;
@@ -90,14 +93,15 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         CartAdapter cartAdapter = new CartAdapter(getContext(), R.layout.item_cart, lstCart);
         recyclerView.setAdapter(cartAdapter);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1,dpToPx(2),false));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1,dpToPx(),false));
         recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
 
     }
-    private int dpToPx(int dp) {
+    private int dpToPx() {
         Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, r.getDisplayMetrics()));
     }
+    @SuppressLint("SetTextI18n")
     public static void updateCart(ArrayList<CartModel> cartList) {
         lstCart = cartList;
         int sum = 0;
@@ -114,7 +118,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         txttotalpay_cart.setText(Support.ConvertMoney(total));
         SharedPreferences.Editor editorCart = sharedPreferencesCart.edit();
         editorCart.putString("item_cart", new Gson().toJson(lstCart));
-        editorCart.commit();
+        editorCart.apply();
     }
 
     private void setControl(View view) {
@@ -128,6 +132,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         int id = view.getId();
