@@ -1,5 +1,6 @@
 package vipro.shop.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,12 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ViewPager viewPager;
     CircleIndicator circleIndicator;
     SliderAdapter sliderAdapter;
-    ArrayList<String> listImage;
+    ArrayList listImage;
     Timer timer;
     Toolbar toolbar;
     SearchView searchView;
@@ -145,34 +143,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void addDataRecently() {
         recentlyViewedList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsRecently, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        recentlyViewedList.add(
-                                new ProductModel(
-                                        jsonObject.getString("code"),
-                                        jsonObject.getString("name"),
-                                        jsonObject.getLong("price"),
-                                        jsonObject.getInt("quantity"),
-                                        jsonObject.getLong("price_discounted"),
-                                        jsonObject.getString("description"),
-                                        jsonObject.getString("image"),
-                                        jsonObject.getString("date_update"),
-                                        jsonObject.getString("type_code")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        @SuppressLint("NotifyDataSetChanged")
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsRecently, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    recentlyViewedList.add(
+                            new ProductModel(
+                                    jsonObject.getString("code"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getLong("price"),
+                                    jsonObject.getInt("quantity"),
+                                    jsonObject.getLong("price_discounted"),
+                                    jsonObject.getString("description"),
+                                    jsonObject.getString("image"),
+                                    jsonObject.getString("date_update"),
+                                    jsonObject.getString("type_code")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                recentlyViewedAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            recentlyViewedAdapter.notifyDataSetChanged();
+        }, error -> {
 
-            }
         });
         queue.add(jsonArrayRequest);
     }
@@ -180,24 +173,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void addDataCategory() {
         categoryList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlTypeProduct, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        categoryList.add(new CategoryModel(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("image")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        @SuppressLint("NotifyDataSetChanged")
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlTypeProduct, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    categoryList.add(
+                            new CategoryModel(
+                                    jsonObject.getString("code"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getString("image")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                categoryAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            categoryAdapter.notifyDataSetChanged();
+        }, error -> {
 
-            }
         });
         queue.add(jsonArrayRequest);
     }
@@ -205,34 +197,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void addDataDiscounted() {
         discountedProductsList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsDiscounted, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        discountedProductsList.add(
-                                new ProductModel(
-                                        jsonObject.getString("code"),
-                                        jsonObject.getString("name"),
-                                        jsonObject.getLong("price"),
-                                        jsonObject.getInt("quantity"),
-                                        jsonObject.getLong("price_discounted"),
-                                        jsonObject.getString("description"),
-                                        jsonObject.getString("image"),
-                                        jsonObject.getString("date_update"),
-                                        jsonObject.getString("type_code")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        @SuppressLint("NotifyDataSetChanged") JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlProductsDiscounted, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    discountedProductsList.add(
+                            new ProductModel(
+                                    jsonObject.getString("code"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getLong("price"),
+                                    jsonObject.getInt("quantity"),
+                                    jsonObject.getLong("price_discounted"),
+                                    jsonObject.getString("description"),
+                                    jsonObject.getString("image"),
+                                    jsonObject.getString("date_update"),
+                                    jsonObject.getString("type_code")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                discountedProductAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            discountedProductAdapter.notifyDataSetChanged();
+        }, error -> {
 
-            }
         });
         queue.add(jsonArrayRequest);
     }
@@ -257,28 +243,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int currentItem = viewPager.getCurrentItem();
-                        int totalItem = listImage.size() - 1;
-                        if (currentItem < totalItem) {
-                            currentItem++;
-                            viewPager.setCurrentItem(currentItem);
-                        } else
-                            viewPager.setCurrentItem(0);
-                    }
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    int currentItem = viewPager.getCurrentItem();
+                    int totalItem = listImage.size() - 1;
+                    if (currentItem < totalItem) {
+                        currentItem++;
+                        viewPager.setCurrentItem(currentItem);
+                    } else
+                        viewPager.setCurrentItem(0);
                 });
             }
         }, 500, 5000);
     }
-    private int dpToPx(int dp) {
+    private int dpToPx() {
         Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, r.getDisplayMetrics()));
     }
     private void setDiscountedRecycler() {
         discountedProductAdapter = new DiscountedProductAdapter(context, R.layout.item_discounted, discountedProductsList);
-        discountRecyclerView.addItemDecoration(new GridSpacingItemDecoration(discountedProductsList.size()-1,dpToPx(2),false));
+        discountRecyclerView.addItemDecoration(new GridSpacingItemDecoration(discountedProductsList.size()-1,dpToPx(),false));
         discountRecyclerView.setAdapter(discountedProductAdapter);
         discountRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
     }
@@ -287,14 +270,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setCategoryRecycler() {
         categoryAdapter = new CategoryAdapter(context, R.layout.item_category, categoryList);
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        categoryRecyclerView.addItemDecoration(new GridSpacingItemDecoration(categoryList.size()-1,dpToPx(2),false));
+        categoryRecyclerView.addItemDecoration(new GridSpacingItemDecoration(categoryList.size()-1,dpToPx(),false));
         categoryRecyclerView.setAdapter(categoryAdapter);
 
     }
 
     private void setRecentlyViewedRecycler() {
         recentlyViewedRecycler.setLayoutManager(new GridLayoutManager(context, 2));
-        recentlyViewedRecycler.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(2),false));
+        recentlyViewedRecycler.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(),false));
 
         recentlyViewedAdapter = new RecentlyAdapter(context, R.layout.item_recently, recentlyViewedList);
         recentlyViewedRecycler.setAdapter(recentlyViewedAdapter);
@@ -313,12 +296,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id) {
-            case R.id.allCategoryMore:
-                Intent intent = new Intent(context, AllCategoryActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-                break;
+        if (id == R.id.allCategoryMore) {
+            Intent intent = new Intent(context, AllCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
     }
 }

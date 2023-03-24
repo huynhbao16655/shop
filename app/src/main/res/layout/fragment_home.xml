@@ -69,7 +69,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="48dp"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/open_sans"
                         android:lineSpacingExtra="4dp"
                         android:text="Shop bán linh kiện điện tử tốt nhất hiện tại."
                         android:textColor="#717171"
@@ -83,7 +82,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:fontFamily="@font/open_sans_semibold"
                         android:text="Các loại linh kiện"
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp"
@@ -95,7 +93,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/open_sans_semibold"
                         android:text="Xem thêm"
                         android:textColor="#448AFF"
                         app:layout_constraintBottom_toBottomOf="@+id/txtTypeProduct"
@@ -111,7 +108,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/allCategoryMore" />
 
-
                     <!--Discount-->
                     <TextView
                         android:id="@+id/txtDiscount"
@@ -119,13 +115,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:fontFamily="@font/open_sans_semibold"
                         android:text="Sản phẩm giảm giá"
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/categoryRecycler" />
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/discountedRecycler"
                         android:layout_width="match_parent"
@@ -137,8 +131,6 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtDiscount" />
-
-
                     <!--Recently-->
                     <TextView
                         android:id="@+id/txtRecently"
@@ -146,18 +138,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:fontFamily="@font/open_sans_semibold"
                         android:text="Linh kiện mới"
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/discountedRecycler" />
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
                         android:id="@+id/recently_item"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
