@@ -23,14 +23,13 @@
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dương Đông Duy ddddddddddddddddddddddđ"
+        android:text="TEST TEST"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageProductOfType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageProductOfType"
-
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         />

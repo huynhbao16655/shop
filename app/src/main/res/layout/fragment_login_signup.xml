@@ -33,14 +33,15 @@
             android:id="@+id/titleLoginSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
             android:text="Đăng nhập - Đăng kí"
             android:layout_weight="1"
             android:gravity="center"
+            android:textSize="25dp"
             android:layout_gravity="center"
             android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
+
     <ImageView
         android:layout_marginTop="5dp"
         android:id="@+id/imageView"
