@@ -117,6 +117,22 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
                 />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnMomo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnPay"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_bg"
+                android:padding="10dp"
+                android:text="Thanh toán"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                />
+
         </RelativeLayout>
 
 
