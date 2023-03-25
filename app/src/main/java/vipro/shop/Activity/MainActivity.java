@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             boolean checkPayCart = getIntent().getBooleanExtra("checkPayCart", false);
             if (checkPayCart)
-                fm = new LoginSignupFragment(this, checkPayCart);
+                fm = new LoginSignupFragment(this, true);
             else {
                 boolean checkChangpass = getIntent().getBooleanExtra("checkChangpass", false);
                 if (checkChangpass)
@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
             switch (id) {
                 case R.id.mn_home:
                     fm = new HomeFragment(getApplicationContext());
-                    break;
-                case R.id.mn_cart:
-                    fm = new CartFragment(getApplicationContext());
                     break;
                 case R.id.mn_account:
                     fm = new LoginSignupFragment(getApplicationContext());

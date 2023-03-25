@@ -63,4 +63,6 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
     //Momo
     implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
+    //Google
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 }

@@ -230,21 +230,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutSumPayOrder"
                 app:layout_constraintVertical_bias="0" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnMomo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnConfirmOrder"
-                app:layout_constraintTop_toBottomOf="@id/btnConfirmOrder"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bg_momo"
-                android:padding="10dp"
-                android:text="Thanh toán Momo"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMomo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnConfirmOrder"
+                    app:layout_constraintTop_toBottomOf="@id/btnConfirmOrder"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bg_momo"
+                    android:padding="10dp"
+                    android:text="Thanh toán Momo"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

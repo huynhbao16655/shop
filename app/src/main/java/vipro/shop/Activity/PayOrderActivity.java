@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,20 +33,23 @@ import vipro.shop.Model.CartModel;
 import vipro.shop.Model.Server;
 import vipro.shop.Model.Support;
 import vipro.shop.R;
+import vn.momo.momo_partner.AppMoMoLib;
 
 public class PayOrderActivity extends AppCompatActivity {
     EditText name_order, address_order, phone_order;
     TextView sumProductConfirm, totalConfirm,unitMoneyPayOrderTotal;
-    Button btnConfirmOrder;
+    AppCompatButton btnConfirmOrder, btnMomo;
     SharedPreferences sharedPreferencesCart, sharedPreferencesUser;
     ArrayList<CartModel> lstCart;
     String username;
     ImageView backPayOrder;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_order);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT); // AppMoMoLib.ENVIRONMENT.PRODUCTION
         setControl();
         getDataCustomer();
         getDataCart();
@@ -186,6 +189,8 @@ public class PayOrderActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
+
+
     private void setControl() {
         name_order = findViewById(R.id.name_order);
         address_order = findViewById(R.id.address_order);
@@ -193,6 +198,7 @@ public class PayOrderActivity extends AppCompatActivity {
         sumProductConfirm = findViewById(R.id.sumProductConfirm);
         totalConfirm = findViewById(R.id.totalConfirm);
         btnConfirmOrder = findViewById(R.id.btnConfirmOrder);
+        btnMomo = findViewById(R.id.btnMomo);
         backPayOrder = findViewById(R.id.backPayOrder);
         unitMoneyPayOrderTotal = findViewById(R.id.unitMoneyPayOrderTotal);
         unitMoneyPayOrderTotal.setPaintFlags(unitMoneyPayOrderTotal.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
