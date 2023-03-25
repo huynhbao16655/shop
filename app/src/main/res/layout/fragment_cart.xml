@@ -1,150 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.CartFragment">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bg">
-
     </ImageView>
-    <LinearLayout
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearcart"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:orientation="horizontal"
-        android:background="@drawable/background_item_product">
-
-        <ImageView
-
-            android:id="@+id/backCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Giỏ hàng"
-            android:textSize="25dp"
-            android:textColor="@android:color/background_dark" />
-
-
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/linearcart"
-        android:paddingBottom="5dp">
-
-        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@drawable/wbg"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleviewcart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <ImageView
 
-
-            <TextView
+                android:id="@+id/backCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/recycleviewcart"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:text="Tổng sản phẩm:"
-                android:textSize="24sp"
-                android:textColor="@color/black"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
 
             <TextView
-                android:id="@+id/txttotalquantity_cart"
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/recycleviewcart"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="20dp"
-                android:text="8"
-                android:textColor="@color/orange"
-                android:textSize="24sp" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Giỏ hàng"
+                android:textColor="@android:color/background_dark"
+                android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txttotalquantity_cart"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp"
-                android:text="Tổng tiền:"
-                android:textSize="24sp"
-                android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/unitMoneyCartTotal"
-                android:layout_width="6.6dp"
-                android:layout_height="wrap_content"
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-                android:layout_below="@id/txttotalquantity_cart"
-                android:layout_marginTop="23dp"
-                android:layout_toLeftOf="@id/txttotalpay_cart"
-                android:text="đ"
-                android:textColor="@color/orange"
-                android:textSize="11.5sp" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linearcart"
+            android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/txttotalpay_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txttotalquantity_cart"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:text="80.000 vnd"
-                android:textColor="@color/orange"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/btnPay"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txttotalpay_cart"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/button_bg"
-                android:padding="10dp"
-                android:text="Thanh toán"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
+                android:padding="10dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnMomo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnPay"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/button_bg"
-                android:padding="10dp"
-                android:text="Thanh toán"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
-
-        </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleviewcart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
 
-    </ScrollView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recycleviewcart"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    android:text="Tổng sản phẩm:"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/txttotalquantity_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/recycleviewcart"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:text="8"
+                    android:textColor="@color/orange"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txttotalquantity_cart"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Tổng tiền:"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/unitMoneyCartTotal"
+                    android:layout_width="6.6dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@id/txttotalquantity_cart"
+                    android:layout_marginTop="23dp"
+                    android:layout_toLeftOf="@id/txttotalpay_cart"
+                    android:text="đ"
+                    android:textColor="@color/orange"
+                    android:textSize="11.5sp" />
+
+                <TextView
+                    android:id="@+id/txttotalpay_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txttotalquantity_cart"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:text="80.000 vnd"
+                    android:textColor="@color/orange"
+                    android:textSize="24sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txttotalpay_cart"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_bg"
+                    android:padding="10dp"
+                    android:text="Thanh toán"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    />
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,5 +61,6 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
     //circleindicator
     implementation 'me.relex:circleindicator:2.1.6'
-
+    //Momo
+    implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
 }

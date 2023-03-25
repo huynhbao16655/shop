@@ -11,13 +11,13 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +42,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("StaticFieldLeak")
     static TextView txttotalquantity_cart, txttotalpay_cart;
     ImageView backCart;
-    Button btnPay;
+    AppCompatButton btnPay, btnMomo;
     TextView unitMoneyCartTotal;
     static SharedPreferences sharedPreferencesUser, sharedPreferencesCart;
 
@@ -127,6 +127,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         txttotalpay_cart = view.findViewById(R.id.txttotalpay_cart);
         backCart = view.findViewById(R.id.backCart);
         btnPay = view.findViewById(R.id.btnPay);
+        btnMomo = view.findViewById(R.id.btnMomo);
         unitMoneyCartTotal = view.findViewById(R.id.unitMoneyCartTotal);
         unitMoneyCartTotal.setPaintFlags(unitMoneyCartTotal.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
