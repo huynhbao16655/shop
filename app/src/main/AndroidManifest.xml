@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="vipro.shop">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -32,6 +31,7 @@
             android:name=".Activity.AllCategoryActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/Theme.App.Starting"
             android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
