@@ -7,8 +7,8 @@
     </style>
     <style name="Theme.App.Starting" parent ="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#fff</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/icon1</item>
-        <item name="windowSplashScreenAnimationDuration">10600</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_flash</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.Shop</item>
     </style>
 
