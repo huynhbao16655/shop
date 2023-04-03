@@ -1,8 +1,10 @@
 package vipro.shop.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -22,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
     Fragment fm;
 
     @Override
+    //dat dieu kien xoay man hinh
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(getApplicationContext(), "Portraint Mode", Toast.LENGTH_SHORT).show();
+        }else if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Toast.makeText(getApplicationContext(), "Landscape Mode", Toast.LENGTH_SHORT).show();
+        }
+    }
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
