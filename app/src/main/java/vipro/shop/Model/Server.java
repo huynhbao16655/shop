@@ -1,7 +1,7 @@
 package vipro.shop.Model;
 
 public class Server {
-    public static String urlBase="http://103.200.23.188/~btcomput/service/";
+    public static String urlBase="http://103.200.23.188/~btcomput/service1/";
     public static String urlImage=urlBase+"assets/hinhanh/";
     public static String urlTypeProduct=urlBase+"getTypeProducts.php";
     public static String urlProductsDiscounted=urlBase+"getProductsDiscounted.php";

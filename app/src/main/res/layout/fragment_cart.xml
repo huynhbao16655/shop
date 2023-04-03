@@ -10,7 +10,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg">
+        android:src="@drawable/bg"
+        android:scaleX="@integer/material_motion_duration_long_1"
+        android:scaleY="@integer/material_motion_duration_long_1">
     </ImageView>
 
     <androidx.appcompat.widget.LinearLayoutCompat
