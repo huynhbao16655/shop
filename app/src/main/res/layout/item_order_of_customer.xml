@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
@@ -26,11 +27,19 @@
         />
 
     <TextView
+        android:id="@+id/titleTotalDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleDateOrderOfCustomer"
+        android:text="Giá giảm"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
         android:id="@+id/titleTotalOrderOfCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@id/titleDateOrderOfCustomer"
+        android:layout_below="@id/titleTotalDiscount"
         android:text="Tổng tiền:"
         android:textSize="20sp"
 
@@ -52,24 +61,48 @@
         android:layout_alignParentRight="true"
         android:text="Ngày lập"
         android:textSize="20sp" />
+
     <TextView
-        android:id="@+id/unitTotalOrderOfCustomer"
+        android:id="@+id/TotalDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="đ"
-        android:textSize="15.5sp"
-        android:layout_below="@id/titleDateOrderOfCustomer"
-        android:layout_toLeftOf="@id/totalOrderOfCustomer"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_below="@id/dateOrderOfCustomer"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="10000"
+        android:layout_toLeftOf="@id/unitTotalOrderOfCustomer1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/unitTotalOrderOfCustomer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateOrderOfCustomer"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:text="vnđ"
+        android:textSize="15.5sp" />
+
+    <TextView
+        android:id="@+id/unitTotalOrderOfCustomer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TotalDiscount"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:text="vnđ"
+        android:textSize="15.5sp" />
+
     <TextView
         android:id="@+id/totalOrderOfCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleDateOrderOfCustomer"
-        android:layout_alignParentRight="true"
+        android:layout_below="@id/TotalDiscount"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@id/unitTotalOrderOfCustomer2"
         android:text="200000"
-        android:textSize="20sp"
-
-        />
+        android:textSize="20sp" />
 </RelativeLayout>

@@ -43,6 +43,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import vipro.shop.Activity.MainActivity;
 import vipro.shop.Model.Server;
 import vipro.shop.Model.Support;
 import vipro.shop.R;
@@ -215,9 +216,8 @@ public class SignupTabFragment extends Fragment implements View.OnClickListener 
                 else {
                     _Clear();
                     Toast.makeText(context, "Đăng kí thành công.", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(context, LoginTabFragment.class);
+                    Intent intent=new Intent(context, MainActivity.class);
                     startActivity(intent);
-
                 }
             }
         }, new Response.ErrorListener() {
@@ -231,8 +231,8 @@ public class SignupTabFragment extends Fragment implements View.OnClickListener 
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username_sigup.getText().toString());
-                params.put("name", name_signup.getText().toString());
                 params.put("password", Support.EndcodeMD5(password_signup.getText().toString()));
+                params.put("name", name_signup.getText().toString());
                 params.put("address", address_signup.getText().toString());
                 params.put("phone", phone_signup.getText().toString());
                 params.put("image", image);

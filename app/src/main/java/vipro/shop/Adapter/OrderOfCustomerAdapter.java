@@ -59,6 +59,7 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
         OrderModel orderModel = orderModelArrayList.get(position);
         holder.codeOrderOfCustomer.setText(orderModel.getCode());
         holder.dateOrderOfCustomer.setText(orderModel.getCreateDate());
+        holder.totalDiscount.setText(Support.ConvertMoney(orderModel.getTotal()));
         holder.totalOrderOfCustomer.setText(Support.ConvertMoney(orderModel.getTotal()));
         holder.itemView.setOnClickListener(view -> openDialogOrderDeatail(position));
     }
@@ -121,16 +122,18 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
     }
 
     public static class ViewOrderOfCustomer extends RecyclerView.ViewHolder {
-        TextView codeOrderOfCustomer, dateOrderOfCustomer, totalOrderOfCustomer,unitTotalOrderOfCustomer;
+        TextView codeOrderOfCustomer, dateOrderOfCustomer, totalOrderOfCustomer, totalDiscount, unitTotalOrderOfCustomer1, unitTotalOrderOfCustomer2;
 
         public ViewOrderOfCustomer(@NonNull View itemView) {
             super(itemView);
             codeOrderOfCustomer = itemView.findViewById(R.id.codeOrderOfCustomer);
             dateOrderOfCustomer = itemView.findViewById(R.id.dateOrderOfCustomer);
             totalOrderOfCustomer = itemView.findViewById(R.id.totalOrderOfCustomer);
-            unitTotalOrderOfCustomer = itemView.findViewById(R.id.unitTotalOrderOfCustomer);
-            unitTotalOrderOfCustomer.setPaintFlags(unitTotalOrderOfCustomer.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-
+            totalDiscount = itemView.findViewById(R.id.TotalDiscount);
+            unitTotalOrderOfCustomer1 = itemView.findViewById(R.id.unitTotalOrderOfCustomer1);
+            unitTotalOrderOfCustomer1.setPaintFlags(unitTotalOrderOfCustomer1.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+            unitTotalOrderOfCustomer2 = itemView.findViewById(R.id.unitTotalOrderOfCustomer2);
+            unitTotalOrderOfCustomer2.setPaintFlags(unitTotalOrderOfCustomer2.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         }
     }
 }
