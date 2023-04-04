@@ -16,12 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,28 +66,22 @@ public class OrderOfCustomerFragment extends Fragment {
     }
 
     private void getDataOrderOfCustomer() {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderOfCustomer + "?username=" + username, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject object = response.getJSONObject(i);
-                        orderModelArrayList.add(
-                                new OrderModel(
-                                        object.getString("code"),
-                                        object.getString("username"),
-                                        object.getLong("total"),
-                                        object.getString("create_date")));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderOfCustomer + "?username=" + username, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject object = response.getJSONObject(i);
+                    orderModelArrayList.add(
+                            new OrderModel(
+                                    object.getString("code"),
+                                    object.getString("username"),
+                                    object.getLong("total"),
+                                    object.getString("create_date")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                orderOfCustomerAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
+            orderOfCustomerAdapter.notifyDataSetChanged();
+        }, error -> {
         });
         Volley.newRequestQueue(context).add(jsonArrayRequest);
     }
@@ -98,7 +89,7 @@ public class OrderOfCustomerFragment extends Fragment {
     private void setAdapterRecycleview() {
         orderModelArrayList = new ArrayList<>();
         orderOfCustomerAdapter = new OrderOfCustomerAdapter(context, R.layout.item_order_of_customer, orderModelArrayList);
-        recycleviewOrderOfCustomer.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(8), true));
+        recycleviewOrderOfCustomer.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(), true));
         recycleviewOrderOfCustomer.setAdapter(orderOfCustomerAdapter);
         recycleviewOrderOfCustomer.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
     }
@@ -109,8 +100,8 @@ public class OrderOfCustomerFragment extends Fragment {
     }
 
 
-    private int dpToPx(int dp) {
+    private int dpToPx() {
         Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, r.getDisplayMetrics()));
     }
 }
