@@ -75,7 +75,12 @@ public class OrderOfCustomerFragment extends Fragment {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject object = response.getJSONObject(i);
-                        orderModelArrayList.add(new OrderModel(object.getString("code"), object.getString("username"), object.getLong("total"), object.getString("create_date")));
+                        orderModelArrayList.add(
+                                new OrderModel(
+                                        object.getString("code"),
+                                        object.getString("username"),
+                                        object.getLong("total"),
+                                        object.getString("create_date")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
