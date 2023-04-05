@@ -37,7 +37,7 @@ public class LoginTabFragment extends Fragment implements View.OnClickListener {
     Context context;
     EditText username_login, password_login;
     CheckBox ckbRemember;
-    Button btnLogin, btnReset;
+    Button btnLogin;
     SharedPreferences sharedPreferencesRemember;
     SharedPreferences sharedPreferencesUser;
 
@@ -77,7 +77,6 @@ public class LoginTabFragment extends Fragment implements View.OnClickListener {
         checkRemember();
         sharedPreferencesUser = context.getSharedPreferences("user", Context.MODE_PRIVATE);
         btnLogin.setOnClickListener(this);
-        btnReset.setOnClickListener(this);
 
     }
 
@@ -97,7 +96,6 @@ public class LoginTabFragment extends Fragment implements View.OnClickListener {
         password_login = view.findViewById(R.id.password_login);
         ckbRemember = view.findViewById(R.id.ckbRemember);
         btnLogin = view.findViewById(R.id.btnLogin);
-        btnReset = view.findViewById(R.id.btnReset);
     }
 
     @Override
@@ -110,9 +108,6 @@ public class LoginTabFragment extends Fragment implements View.OnClickListener {
                     Login();
                 }
                 break;
-            case  R.id.btnReset:
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
         }
     }
 

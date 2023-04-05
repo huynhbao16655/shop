@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ResetPassActivity">
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/line1"
         android:layout_width="match_parent"
