@@ -19,4 +19,8 @@ public class Server {
     public static String urlChangePassCustomer=urlBase+"changePassCustomer.php";
     public static String urlGetListOrderDetailByCode=urlBase+"getListOrderDetailByCode.php";
     public static String urlGetListOrderOfCustomer=urlBase+"getListOrderOfCustomer.php";
+    public static String urlReset=urlBase+"gmail/reset-password.php";
+
+    public static String urlNewPass=urlBase+"gmail/new-password.php";
+
 }
