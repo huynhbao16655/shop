@@ -338,6 +338,7 @@ public class UpdateCustomerFragment extends Fragment implements View.OnClickList
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+
                 params.put("username", username);
                 params.put("name", name_updateCustomer.getText().toString());
                 params.put("address", address_updateCustomer.getText().toString());

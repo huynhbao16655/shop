@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ import vipro.shop.Model.Server;
 import vipro.shop.R;
 
 public class ResetPassActivity extends AppCompatActivity {
-
+    ImageView backLogin;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,9 @@ public class ResetPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_pass);
         EditText editText = findViewById(R.id.editEmail);
         Button button = findViewById(R.id.btnresetpass);
+        backLogin = findViewById(R.id.btn_back_to_login);
         ProgressBar progressBar = findViewById(R.id.progress);
+        setClick();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +79,7 @@ public class ResetPassActivity extends AppCompatActivity {
                         return paramV;
                     }
                 };
-                    stringRequest.setRetryPolicy(new RetryPolicy() {
+                stringRequest.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
                         return 30000;
@@ -95,6 +98,14 @@ public class ResetPassActivity extends AppCompatActivity {
                 queue.add(stringRequest);
 
             }
+        });
+    }
+
+    private void setClick() {
+        backLogin.setOnClickListener(view -> {
+            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 

@@ -9,14 +9,14 @@
         android:padding="10dp"
         tools:context=".Fragment.LoginTabFragment">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bg"
             android:drawableLeft="@drawable/ic_baseline_account_circle_24"
             android:drawablePadding="10dp"
-            android:hint="Tài khoản"
+            android:hint="Tài khoản *"
             android:inputType="text"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
             android:background="@drawable/edit_text_bg"
             android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
             android:drawablePadding="10dp"
-            android:hint="Mật khẩu"
+            android:hint="Mật khẩu *"
             android:inputType="textPassword"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -51,7 +51,7 @@ import vipro.shop.Retrofit.APIUtils;
 import vipro.shop.Retrofit.ShopAppApi;
 
 public class SignupTabFragment extends Fragment implements View.OnClickListener {
-    EditText username_sigup, password_signup, password_confirm_signup, name_signup, address_signup, phone_signup;
+    EditText username_sigup, password_signup, password_confirm_signup, name_signup, address_signup, phone_signup, mail_sigup;
     Button btnSignup;
     Context context;
     ImageView imageSignup;
@@ -89,6 +89,7 @@ public class SignupTabFragment extends Fragment implements View.OnClickListener 
     }
 
     private void setControl(View view) {
+        mail_sigup = view.findViewById(R.id.mail_sigup);
         username_sigup = view.findViewById(R.id.username_sigup);
         password_signup = view.findViewById(R.id.password_signup);
         password_confirm_signup = view.findViewById(R.id.password_confirm_signup);
@@ -163,6 +164,7 @@ public class SignupTabFragment extends Fragment implements View.OnClickListener 
     }
 
     private void _Clear() {
+        mail_sigup.setText("");
         username_sigup.setText("");
         password_signup.setText("");
         name_signup.setText("");
@@ -230,6 +232,7 @@ public class SignupTabFragment extends Fragment implements View.OnClickListener 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("email", mail_sigup.getText().toString());
                 params.put("username", username_sigup.getText().toString());
                 params.put("password", Support.EndcodeMD5(password_signup.getText().toString()));
                 params.put("name", name_signup.getText().toString());

@@ -98,7 +98,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Thông báo!");
         builder.setMessage("Bạn có muốn xoá sản phẩm " + cartModel.getProductModel().getName() + "?");
-        builder.setIcon(R.drawable.icon);
+        builder.setIcon(R.drawable.logo2);
         builder.setPositiveButton("Có", (dialogInterface, i) -> deleteCartModel(position));
         builder.setNegativeButton("Không", (dialogInterface, i) -> {
 
@@ -118,9 +118,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return lstCart.size();
     }
 
-    public static class CartViewHolder extends RecyclerView.ViewHolder {
+    public static class CartViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        ImageView image, imgtru, imgcong;
         TextView name, price, subtotal,unitMoneyItemCartPrice,unitMoneyItemCartSubtotal;
         EditText quantity;
 

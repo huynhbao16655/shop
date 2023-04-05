@@ -3,15 +3,24 @@ package vipro.shop.Model;
 import java.io.Serializable;
 
 public class CustomerModel implements Serializable {
-    private String username,name,password,address,phone,image;
+    private String username,name,password,address,phone,image, email;
 
-    public CustomerModel(String username, String name, String password, String address, String phone, String image) {
+    public CustomerModel(String username, String name, String password, String address, String phone, String image, String email) {
         this.username = username;
         this.name = name;
         this.password = password;
         this.address = address;
         this.phone = phone;
         this.image = image;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
