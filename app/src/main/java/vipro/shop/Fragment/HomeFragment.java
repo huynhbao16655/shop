@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 try {
 
                     listImage.add(response.getString(i));
-                    //Log.d("duy", "onResponse: "+response.getString(i));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

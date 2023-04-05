@@ -206,8 +206,6 @@ public class UpdateCustomerFragment extends Fragment implements View.OnClickList
 
 
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
