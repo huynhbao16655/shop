@@ -22,9 +22,6 @@
             android:name=".Activity.NewPassword"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.ResetPassActivity"
             android:exported="false" />
         <activity

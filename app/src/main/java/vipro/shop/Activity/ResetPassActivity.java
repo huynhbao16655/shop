@@ -34,7 +34,7 @@ import vipro.shop.Model.Server;
 import vipro.shop.R;
 
 public class ResetPassActivity extends AppCompatActivity {
-    ImageView backLogin;
+    ImageView btn_back_to_login;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,11 @@ public class ResetPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_pass);
         EditText editText = findViewById(R.id.editEmail);
         Button button = findViewById(R.id.btnresetpass);
-        backLogin = findViewById(R.id.btn_back_to_login);
         ProgressBar progressBar = findViewById(R.id.progress);
+        btn_back_to_login = findViewById(R.id.btn_back_to_login);
         setClick();
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -79,7 +80,7 @@ public class ResetPassActivity extends AppCompatActivity {
                         return paramV;
                     }
                 };
-                stringRequest.setRetryPolicy(new RetryPolicy() {
+                    stringRequest.setRetryPolicy(new RetryPolicy() {
                     @Override
                     public int getCurrentTimeout() {
                         return 30000;
@@ -98,11 +99,12 @@ public class ResetPassActivity extends AppCompatActivity {
                 queue.add(stringRequest);
 
             }
+
         });
     }
 
     private void setClick() {
-        backLogin.setOnClickListener(view -> {
+        btn_back_to_login.setOnClickListener(view -> {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
             finish();
