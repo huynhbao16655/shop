@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import vipro.shop.Adapter.OrderOfCustomerAdapter;
+import vipro.shop.Model.CartModel;
 import vipro.shop.Model.GridSpacingItemDecoration;
 import vipro.shop.Model.OrderModel;
 import vipro.shop.Model.Server;
@@ -39,9 +41,9 @@ public class OrderOfCustomerFragment extends Fragment {
     RecyclerView recycleviewOrderOfCustomer;
     ArrayList<OrderModel> orderModelArrayList;
     OrderOfCustomerAdapter orderOfCustomerAdapter;
-    String username;
-    SharedPreferences sharedPreferencesUser;
-    TextView titleOrderOfCustomer;
+    String username, status;
+    SharedPreferences sharedPreferencesUser, sharedPreferencesStatus;
+    TextView titleOrderOfCustomer, totalStatus;
 
     public OrderOfCustomerFragment(Context context) {
         this.context = context;
@@ -60,6 +62,7 @@ public class OrderOfCustomerFragment extends Fragment {
         getCustomer();
         setAdapterRecycleview();
         getDataOrderOfCustomer();
+//        getStatus();
     }
 
     private void getCustomer() {
@@ -68,6 +71,12 @@ public class OrderOfCustomerFragment extends Fragment {
         titleOrderOfCustomer.setText("Danh sách đơn hàng của " + username);
     }
 
+
+    private  void  getStatus(){
+        sharedPreferencesStatus = context.getSharedPreferences("status", Context.MODE_PRIVATE);
+        status = sharedPreferencesStatus.getString("status", "");
+
+    }
     private void getDataOrderOfCustomer() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderOfCustomer + "?username=" + username, new Response.Listener<JSONArray>() {
             @Override
@@ -80,6 +89,7 @@ public class OrderOfCustomerFragment extends Fragment {
                                         object.getString("code"),
                                         object.getString("username"),
                                         object.getLong("total"),
+                                        object.getString("status"),
                                         object.getString("create_date")));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -106,6 +116,7 @@ public class OrderOfCustomerFragment extends Fragment {
     private void setControl(View view) {
         recycleviewOrderOfCustomer = view.findViewById(R.id.recycleviewOrderOfCustomer);
         titleOrderOfCustomer = view.findViewById(R.id.titleOrderOfCustomer);
+//        totalStatus = view.findViewById(R.id.totalStatus);
     }
 
 

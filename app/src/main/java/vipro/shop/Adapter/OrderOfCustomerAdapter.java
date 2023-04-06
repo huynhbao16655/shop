@@ -3,6 +3,7 @@ package vipro.shop.Adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.util.TypedValue;
@@ -42,6 +43,10 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
     ArrayList<OrderDetailModel> orderDetailModelArrayList;
     OrderDetailAdapter orderDetailAdapter;
 
+    TextView titleOrderDetail;
+    String idcart;
+    SharedPreferences sharedPreferencesID;
+
     public OrderOfCustomerAdapter(Context context, int layout, ArrayList<OrderModel> orderModelArrayList) {
         this.context = context;
         this.layout = layout;
@@ -59,12 +64,14 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
         OrderModel orderModel = orderModelArrayList.get(position);
         holder.codeOrderOfCustomer.setText(orderModel.getCode());
         holder.dateOrderOfCustomer.setText(orderModel.getCreateDate());
+        holder.totalStatus.setText(orderModel.getStatus());
         holder.totalDiscount.setText(Support.ConvertMoney(orderModel.getTotal()));
         holder.totalOrderOfCustomer.setText(Support.ConvertMoney(orderModel.getTotal()));
         holder.itemView.setOnClickListener(view -> openDialogOrderDeatail(position));
     }
 
     private void openDialogOrderDeatail(int position) {
+
         dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_order_detail);
@@ -72,9 +79,15 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
         setControl();
         setAdapterOrderDetail();
         getDataOrderDetail(position);
+//        getidHoadon();
         setClick();
         dialog.show();
     }
+
+//    private void getidHoadon() {
+//        idcart = sharedPreferencesID.getString("code_order", "");
+//        titleOrderDetail.setText("Chi tiết đơn hàng " + idcart);
+//    }
 
     private void getDataOrderDetail(int position) {
         @SuppressLint("NotifyDataSetChanged") JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlGetListOrderDetailByCode + "?code_order=" + orderModelArrayList.get(position).getCode(), response -> {
@@ -82,7 +95,12 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
                 try {
                     JSONObject object=response.getJSONObject(i);
 
-                    orderDetailModelArrayList.add(new OrderDetailModel(object.getString("code_order"),object.getString("name_product"),object.getLong("price"),object.getInt("quantity"),object.getLong("total")));
+                    orderDetailModelArrayList.add(new OrderDetailModel(
+                            object.getString("code_order"),
+                            object.getString("name_product"),
+                            object.getLong("price"),
+                            object.getInt("quantity"),
+                            object.getLong("total")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -122,7 +140,7 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
     }
 
     public static class ViewOrderOfCustomer extends RecyclerView.ViewHolder {
-        TextView codeOrderOfCustomer, dateOrderOfCustomer, totalOrderOfCustomer, totalDiscount, unitTotalOrderOfCustomer1, unitTotalOrderOfCustomer2;
+        TextView codeOrderOfCustomer, dateOrderOfCustomer, totalOrderOfCustomer, totalDiscount, unitTotalOrderOfCustomer1, unitTotalOrderOfCustomer2, totalStatus;
 
         public ViewOrderOfCustomer(@NonNull View itemView) {
             super(itemView);
@@ -130,6 +148,7 @@ public class OrderOfCustomerAdapter extends RecyclerView.Adapter<OrderOfCustomer
             dateOrderOfCustomer = itemView.findViewById(R.id.dateOrderOfCustomer);
             totalOrderOfCustomer = itemView.findViewById(R.id.totalOrderOfCustomer);
             totalDiscount = itemView.findViewById(R.id.TotalDiscount);
+            totalStatus = itemView.findViewById(R.id.totalStatus);
             unitTotalOrderOfCustomer1 = itemView.findViewById(R.id.unitTotalOrderOfCustomer1);
             unitTotalOrderOfCustomer1.setPaintFlags(unitTotalOrderOfCustomer1.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
             unitTotalOrderOfCustomer2 = itemView.findViewById(R.id.unitTotalOrderOfCustomer2);
