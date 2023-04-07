@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Tất cả loại linh kiện"
+            android:text="Tất cả hãng"
             android:textColor="@android:color/background_dark" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

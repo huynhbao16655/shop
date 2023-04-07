@@ -116,7 +116,7 @@ public class OrderOfCustomerFragment extends Fragment {
     private void setControl(View view) {
         recycleviewOrderOfCustomer = view.findViewById(R.id.recycleviewOrderOfCustomer);
         titleOrderOfCustomer = view.findViewById(R.id.titleOrderOfCustomer);
-//        totalStatus = view.findViewById(R.id.totalStatus);
+        totalStatus = view.findViewById(R.id.totalStatus);
     }
 
 

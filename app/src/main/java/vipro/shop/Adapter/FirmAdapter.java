@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import vipro.shop.Activity.ProductsOfFirmActivity;
 import vipro.shop.Activity.ProductsOfTypeActivity;
 import vipro.shop.Model.FirmModel;
 import vipro.shop.Model.Server;
@@ -34,20 +35,20 @@ public class FirmAdapter extends RecyclerView.Adapter<FirmAdapter.FirmViewHolder
 
     @NonNull
     @Override
-    public FirmAdapter.FirmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FirmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewFirm) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_firm, parent, false);
 
-        return new FirmAdapter.FirmViewHolder(view);
+        return new FirmViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FirmAdapter.FirmViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FirmViewHolder holder, int position) {
         FirmModel firmModel = firmList.get(position);
         Picasso.get().load(Server.urlImage + firmModel.getImage()).into(holder.firmImage);
         holder.firmName.setText(firmModel.getName());
         holder.itemView.setOnClickListener(view -> {
-            Intent intent=new Intent(context, ProductsOfTypeActivity.class);
+            Intent intent=new Intent(context, ProductsOfFirmActivity.class);
             intent.putExtra("firmProduct",firmModel);
             intent.putExtra("check",true);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

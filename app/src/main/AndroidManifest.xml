@@ -19,13 +19,10 @@
         tools:replace="android:theme"
         tools:targetApi="31">
         <activity
-            android:name=".ProductDetail2Activity"
+            android:name=".Activity.AllFirmActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ProductsOfFirmActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.AllFirmActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.NewPassword"

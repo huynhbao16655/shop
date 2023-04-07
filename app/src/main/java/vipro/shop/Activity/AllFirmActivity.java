@@ -84,7 +84,7 @@ public class AllFirmActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         int id=view.getId();
-        if (id == R.id.backAllTypeProduct) {
+        if (id == R.id.backAllFirmProduct) {
             Intent back = new Intent(AllFirmActivity.this, MainActivity.class);
             startActivity(back);
             finish();

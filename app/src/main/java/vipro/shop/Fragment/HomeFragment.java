@@ -56,8 +56,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     DiscountedProductAdapter discountedProductAdapter;
     ArrayList<ProductModel> discountedProductsList;
     CategoryAdapter categoryAdapter;
-    ArrayList<CategoryModel> categoryList;
+
     FirmAdapter firmAdapter;
+    ArrayList<CategoryModel> categoryList;
     ArrayList<FirmModel> firmList;
     RecentlyAdapter recentlyViewedAdapter;
     ArrayList<ProductModel> recentlyViewedList;
@@ -341,7 +342,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(context, AllCategoryActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-        }else if (id == R.id.allFirmMore){
+        }
+        else if (id == R.id.allFirmMore){
             Intent intent = new Intent(context, AllFirmActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

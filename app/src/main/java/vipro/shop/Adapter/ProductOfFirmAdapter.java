@@ -22,7 +22,6 @@ import vipro.shop.Model.ProductModel;
 import vipro.shop.Model.Server;
 import vipro.shop.Model.Support;
 import vipro.shop.R;
-
 public class ProductOfFirmAdapter extends RecyclerView.Adapter<ProductOfFirmAdapter.ViewProductOfFirm> {
     Context context;
     int layout;
@@ -37,12 +36,12 @@ public class ProductOfFirmAdapter extends RecyclerView.Adapter<ProductOfFirmAdap
 
     @NonNull
     @Override
-    public ProductOfFirmAdapter.ViewProductOfFirm onCreateViewHolder(@NonNull ViewGroup parent, int viewFirm) {
-        return new ProductOfFirmAdapter.ViewProductOfFirm(LayoutInflater.from(context).inflate(layout,null));
+    public ViewProductOfFirm onCreateViewHolder(@NonNull ViewGroup parent, int viewFirm) {
+        return new ViewProductOfFirm(LayoutInflater.from(context).inflate(layout,null));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductOfFirmAdapter.ViewProductOfFirm holder, int position) {
+    public void onBindViewHolder(@NonNull ViewProductOfFirm holder, int position) {
         ProductModel productModel=arrayList.get(position);
         Picasso.get().load(Server.urlImage+productModel.getImage()).into(holder.imageProductOfFirm);
         holder.nameProductOfFirm.setText(productModel.getName());

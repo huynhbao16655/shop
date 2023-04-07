@@ -31,7 +31,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import vipro.shop.Adapter.ProductOfFirmAdapter;
 import vipro.shop.Adapter.ProductOfTypeAdapter;
 import vipro.shop.Model.CartModel;
 import vipro.shop.Model.GridSpacingItemDecoration;

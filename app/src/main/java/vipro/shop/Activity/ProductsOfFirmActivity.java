@@ -28,8 +28,7 @@ import vipro.shop.Model.GridSpacingItemDecoration;
 import vipro.shop.Model.ProductModel;
 import vipro.shop.Model.Server;
 import vipro.shop.R;
-
-public class ProductsOfFirmActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductsOfFirmActivity extends AppCompatActivity implements View.OnClickListener{
     RecyclerView recycleviewProductsOfFirm;
     ProductOfFirmAdapter productOfFirmAdapter;
     ArrayList<ProductModel> productModelArrayList;
@@ -66,7 +65,7 @@ public class ProductsOfFirmActivity extends AppCompatActivity implements View.On
     private void loadDataProductOfFirm() {
         String url;
         if (check)
-            url = Server.urlProductsOfFirm + "?firm_code=" + firmModel.getCode();
+            url = Server.urlProductsOfType + "?firm_code=" + firmModel.getCode();
         else
             url = Server.urlSearch + "?keyword=" + query;
         RequestQueue queue = Volley.newRequestQueue(this);

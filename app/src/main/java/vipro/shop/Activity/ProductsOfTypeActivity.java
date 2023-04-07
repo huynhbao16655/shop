@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import vipro.shop.Adapter.ProductOfTypeAdapter;
 import vipro.shop.Model.CategoryModel;
+import vipro.shop.Model.FirmModel;
 import vipro.shop.Model.GridSpacingItemDecoration;
 import vipro.shop.Model.ProductModel;
 import vipro.shop.Model.Server;
@@ -36,6 +37,8 @@ public class ProductsOfTypeActivity extends AppCompatActivity implements View.On
     ImageView backProductOfType;
     TextView txtTileProductsOfType;
     private CategoryModel categoryModel;
+
+    private FirmModel firmModel;
     private boolean check;
     private String query="";
 
