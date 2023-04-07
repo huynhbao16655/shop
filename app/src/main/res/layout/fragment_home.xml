@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:text="Các loại linh kiện"
+                        android:text="Danh mục"
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +108,40 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/allCategoryMore" />
 
+                    <!--Type firm-->
+                    <TextView
+                        android:id="@+id/txtTypeFirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:text="Hãng"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/categoryRecycler" />
+
+                    <TextView
+                        android:id="@+id/allFirmMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="Xem thêm"
+                        android:textColor="#448AFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtTypeFirm"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/txtTypeFirm" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/firmRecycler"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/allFirmMore" />
+
+
                     <!--Discount-->
                     <TextView
                         android:id="@+id/txtDiscount"
@@ -119,7 +153,7 @@
                         android:textColor="@android:color/background_dark"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/categoryRecycler" />
+                        app:layout_constraintTop_toBottomOf="@+id/firmRecycler" />
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/discountedRecycler"
                         android:layout_width="match_parent"

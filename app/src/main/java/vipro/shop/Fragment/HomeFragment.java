@@ -36,12 +36,15 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 import vipro.shop.Activity.AllCategoryActivity;
+import vipro.shop.Activity.AllFirmActivity;
 import vipro.shop.Activity.ProductsOfTypeActivity;
 import vipro.shop.Adapter.CategoryAdapter;
 import vipro.shop.Adapter.DiscountedProductAdapter;
+import vipro.shop.Adapter.FirmAdapter;
 import vipro.shop.Adapter.RecentlyAdapter;
 import vipro.shop.Adapter.SliderAdapter;
 import vipro.shop.Model.CategoryModel;
+import vipro.shop.Model.FirmModel;
 import vipro.shop.Model.GridSpacingItemDecoration;
 import vipro.shop.Model.ProductModel;
 import vipro.shop.Model.Server;
@@ -49,17 +52,17 @@ import vipro.shop.R;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     Context context;
-    RecyclerView discountRecyclerView, categoryRecyclerView, recentlyViewedRecycler;
+    RecyclerView discountRecyclerView, categoryRecyclerView, firmRecyclerView, recentlyViewedRecycler;
     DiscountedProductAdapter discountedProductAdapter;
     ArrayList<ProductModel> discountedProductsList;
-
     CategoryAdapter categoryAdapter;
     ArrayList<CategoryModel> categoryList;
-
+    FirmAdapter firmAdapter;
+    ArrayList<FirmModel> firmList;
     RecentlyAdapter recentlyViewedAdapter;
     ArrayList<ProductModel> recentlyViewedList;
 
-    TextView allCategoryMore;
+    TextView allCategoryMore, allFirmMore;
     ViewPager viewPager;
     CircleIndicator circleIndicator;
     SliderAdapter sliderAdapter;
@@ -83,6 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         setControl(view);
         addDataDiscounted();
+        addDataFirm();
         addDataCategory();
         addDataRecently();
 //banner
@@ -90,9 +94,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         loadImageSlider();
         toolbar.setNavigationIcon(R.drawable.ic_baseline_home_24);
         setDiscountedRecycler();
+        setFirmRecycler();
         setCategoryRecycler();
         setRecentlyViewedRecycler();
         allCategoryMore.setOnClickListener(this);
+        allFirmMore.setOnClickListener(this);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -158,7 +164,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     jsonObject.getString("description"),
                                     jsonObject.getString("image"),
                                     jsonObject.getString("date_update"),
-                                    jsonObject.getString("type_code")));
+                                    jsonObject.getString("type_code"),
+                                    jsonObject.getString("firm_code")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -194,6 +201,30 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         queue.add(jsonArrayRequest);
     }
 
+    private void addDataFirm() {
+        firmList = new ArrayList<>();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        @SuppressLint("NotifyDataSetChanged")
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.urlFirmProduct, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(i);
+                    firmList.add(
+                            new FirmModel(
+                                    jsonObject.getString("code"),
+                                    jsonObject.getString("name"),
+                                    jsonObject.getString("image")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            firmAdapter.notifyDataSetChanged();
+        }, error -> {
+
+        });
+        queue.add(jsonArrayRequest);
+    }
+
     private void addDataDiscounted() {
         discountedProductsList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -211,7 +242,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     jsonObject.getString("description"),
                                     jsonObject.getString("image"),
                                     jsonObject.getString("date_update"),
-                                    jsonObject.getString("type_code")));
+                                    jsonObject.getString("type_code"),
+                                    jsonObject.getString("firm_code")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -226,7 +258,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setControl(View view) {
         discountRecyclerView = view.findViewById(R.id.discountedRecycler);
         categoryRecyclerView = view.findViewById(R.id.categoryRecycler);
+        firmRecyclerView = view.findViewById(R.id.firmRecycler);
         allCategoryMore = view.findViewById(R.id.allCategoryMore);
+        allFirmMore = view.findViewById(R.id.allFirmMore);
         recentlyViewedRecycler = view.findViewById(R.id.recently_item);
         viewPager = view.findViewById(R.id.viewPager);
         circleIndicator = view.findViewById(R.id.circleindicator);
@@ -275,10 +309,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    private void setFirmRecycler() {
+        firmAdapter = new FirmAdapter(context, R.layout.item_firm, firmList);
+        firmRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        firmRecyclerView.addItemDecoration(new GridSpacingItemDecoration(firmList.size()-1,dpToPx(),false));
+        firmRecyclerView.setAdapter(firmAdapter);
+
+    }
+
     private void setRecentlyViewedRecycler() {
         recentlyViewedRecycler.setLayoutManager(new GridLayoutManager(context, 2));
         recentlyViewedRecycler.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(),false));
-
         recentlyViewedAdapter = new RecentlyAdapter(context, R.layout.item_recently, recentlyViewedList);
         recentlyViewedRecycler.setAdapter(recentlyViewedAdapter);
     }
@@ -298,6 +339,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int id = view.getId();
         if (id == R.id.allCategoryMore) {
             Intent intent = new Intent(context, AllCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }else if (id == R.id.allFirmMore){
+            Intent intent = new Intent(context, AllFirmActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

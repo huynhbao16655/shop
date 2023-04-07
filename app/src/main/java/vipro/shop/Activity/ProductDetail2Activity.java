@@ -1,5 +1,9 @@
 package vipro.shop.Activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -40,7 +40,7 @@ import vipro.shop.Model.Server;
 import vipro.shop.Model.Support;
 import vipro.shop.R;
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProductDetail2Activity extends AppCompatActivity implements View.OnClickListener {
     ImageView back, imageProductDetail;
     TextView nameProductDetail, priceProductDetail, priceDiscountProductDetail, descriptionProdcutDetail,titleSimilarProduct,unitPriceProductDetail,unitPriceDiscountProductDetail;
     EditText quantityProductDetail;
@@ -50,13 +50,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     ArrayList<CartModel> listCart = null;
     RecyclerView recycleviewSimilarProduct;
     ArrayList<ProductModel> lstSimilarProducts;
-    ProductOfTypeAdapter similarProductAdapter;
+    ProductOfFirmAdapter similarProductAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_detail);
+        setContentView(R.layout.activity_product_detail2);
         setControl();
         loadDataProduct();
         setClick();
@@ -97,19 +97,19 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setControl() {
-        back = findViewById(R.id.backProductDetail);
-        imageProductDetail = findViewById(R.id.imageProductDetail);
-        nameProductDetail = findViewById(R.id.nameProductDetail);
-        priceProductDetail = findViewById(R.id.priceProductDetail);
-        priceDiscountProductDetail = findViewById(R.id.priceDiscountProductDetail);
-        descriptionProdcutDetail = findViewById(R.id.descriptionProdcutDetail);
-        quantityProductDetail = findViewById(R.id.quantityProductDetail);
-        btnBuyNow = findViewById(R.id.btnBuyNow);
-        btnAddCart = findViewById(R.id.btnAddCart);
-        recycleviewSimilarProduct = findViewById(R.id.recycleviewSimilarProduct);
-        titleSimilarProduct = findViewById(R.id.titleSimilarProduct);
-        unitPriceProductDetail = findViewById(R.id.unitPriceProductDetail);
-        unitPriceDiscountProductDetail = findViewById(R.id.unitPriceDiscountProductDetail);
+        back = findViewById(R.id.backProductDetail2);
+        imageProductDetail = findViewById(R.id.imageProductDetail2);
+        nameProductDetail = findViewById(R.id.nameProductDetail2);
+        priceProductDetail = findViewById(R.id.priceProductDetail2);
+        priceDiscountProductDetail = findViewById(R.id.priceDiscountProductDetail2);
+        descriptionProdcutDetail = findViewById(R.id.descriptionProdcutDetail2);
+        quantityProductDetail = findViewById(R.id.quantityProductDetail2);
+        btnBuyNow = findViewById(R.id.btnBuyNow2);
+        btnAddCart = findViewById(R.id.btnAddCart2);
+        recycleviewSimilarProduct = findViewById(R.id.recycleviewSimilarProduct2);
+        titleSimilarProduct = findViewById(R.id.titleSimilarProduct2);
+        unitPriceProductDetail = findViewById(R.id.unitPriceProductDetail2);
+        unitPriceDiscountProductDetail = findViewById(R.id.unitPriceDiscountProductDetail2);
         priceProductDetail.setPaintFlags(priceProductDetail.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         unitPriceProductDetail.setPaintFlags(unitPriceProductDetail.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         unitPriceDiscountProductDetail.setPaintFlags(unitPriceDiscountProductDetail.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -121,7 +121,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         int id = view.getId();
         switch (id) {
             case R.id.backProductDetail:
-                Intent i = new Intent(ProductDetailActivity.this, MainActivity.class);
+                Intent i = new Intent(ProductDetail2Activity.this, MainActivity.class);
                 startActivity(i);
                 finish();
                 break;

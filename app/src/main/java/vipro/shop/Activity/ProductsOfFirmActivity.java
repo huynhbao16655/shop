@@ -1,5 +1,9 @@
 package vipro.shop.Activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,10 +12,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -22,20 +22,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import vipro.shop.Adapter.ProductOfTypeAdapter;
-import vipro.shop.Model.CategoryModel;
+import vipro.shop.Adapter.ProductOfFirmAdapter;
+import vipro.shop.Model.FirmModel;
 import vipro.shop.Model.GridSpacingItemDecoration;
 import vipro.shop.Model.ProductModel;
 import vipro.shop.Model.Server;
 import vipro.shop.R;
 
-public class ProductsOfTypeActivity extends AppCompatActivity implements View.OnClickListener {
-    RecyclerView recycleviewProductsOfType;
-    ProductOfTypeAdapter productOfTypeAdapter;
+public class ProductsOfFirmActivity extends AppCompatActivity implements View.OnClickListener {
+    RecyclerView recycleviewProductsOfFirm;
+    ProductOfFirmAdapter productOfFirmAdapter;
     ArrayList<ProductModel> productModelArrayList;
-    ImageView backProductOfType;
-    TextView txtTileProductsOfType;
-    private CategoryModel categoryModel;
+    ImageView backProductOfFirm;
+    TextView txtTileProductsOfFirm;
+    private FirmModel firmModel;
     private boolean check;
     private String query="";
 
@@ -43,30 +43,30 @@ public class ProductsOfTypeActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_of_type);
+        setContentView(R.layout.activity_products_of_firm);
         setControl();
 
         Intent intent = getIntent();
         check = intent.getBooleanExtra("check", true);
 
         if (check) {
-            categoryModel = (CategoryModel) intent.getSerializableExtra("typeProduct");
-            txtTileProductsOfType.setText("Danh sách sản phẩm của loại " + categoryModel.getName());
+            firmModel = (FirmModel) intent.getSerializableExtra("firmProduct");
+            txtTileProductsOfFirm.setText("Danh sách sản phẩm của " + firmModel.getName());
         } else {
             query = intent.getStringExtra("query");
-            txtTileProductsOfType.setText("Tìm kiếm theo " + query);
+            txtTileProductsOfFirm.setText("Tìm kiếm theo " + query);
         }
         setRecyclerAdapter();
-        loadDataProductOfType();
-        backProductOfType.setOnClickListener(this);
+        loadDataProductOfFirm();
+        backProductOfFirm.setOnClickListener(this);
 
 
     }
 
-    private void loadDataProductOfType() {
+    private void loadDataProductOfFirm() {
         String url;
         if (check)
-            url = Server.urlProductsOfType + "?type_code=" + categoryModel.getCode();
+            url = Server.urlProductsOfFirm + "?firm_code=" + firmModel.getCode();
         else
             url = Server.urlSearch + "?keyword=" + query;
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -90,7 +90,7 @@ public class ProductsOfTypeActivity extends AppCompatActivity implements View.On
                     e.printStackTrace();
                 }
             }
-            productOfTypeAdapter.notifyDataSetChanged();
+            productOfFirmAdapter.notifyDataSetChanged();
         }, error -> {
 
         });
@@ -104,22 +104,22 @@ public class ProductsOfTypeActivity extends AppCompatActivity implements View.On
     private void setRecyclerAdapter() {
 
         productModelArrayList = new ArrayList<>();
-        productOfTypeAdapter = new ProductOfTypeAdapter(this, R.layout.item_product_of_type, productModelArrayList);
-        recycleviewProductsOfType.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(),false));
-        recycleviewProductsOfType.setAdapter(productOfTypeAdapter);
-        recycleviewProductsOfType.setLayoutManager(new GridLayoutManager(this, 2));
+        productOfFirmAdapter = new ProductOfFirmAdapter(this, R.layout.item_product_of_firm, productModelArrayList);
+        recycleviewProductsOfFirm.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(),false));
+        recycleviewProductsOfFirm.setAdapter(productOfFirmAdapter);
+        recycleviewProductsOfFirm.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
     private void setControl() {
-        recycleviewProductsOfType = findViewById(R.id.recycleviewProductsOfType);
-        backProductOfType = findViewById(R.id.backProductOfType);
-        txtTileProductsOfType = findViewById(R.id.txtTileProductsOfType);
+        recycleviewProductsOfFirm = findViewById(R.id.recycleviewProductsOfFirm);
+        backProductOfFirm = findViewById(R.id.backProductOfFirm);
+        txtTileProductsOfFirm = findViewById(R.id.txtTileProductsOfFirm);
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.backProductOfType) {
+        if (id == R.id.backProductOfFirm) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();

@@ -7,9 +7,11 @@ public class ProductModel implements Serializable {
     private long price;
     private int quantity;
     private long price_discounted;
-    private String description,image,date_update,type_code;
+    private String description,image,date_update,type_code, firm_code;
 
-    public ProductModel(String code, String name, long price, int quantity, long price_discounted, String description, String image, String date_update, String type_code) {
+
+
+    public ProductModel(String code, String name, long price, int quantity, long price_discounted, String description, String image, String date_update, String type_code, String firm_code) {
         this.code = code;
         this.name = name;
         this.price = price;
@@ -19,6 +21,7 @@ public class ProductModel implements Serializable {
         this.image = image;
         this.date_update = date_update;
         this.type_code = type_code;
+        this.firm_code = firm_code;
     }
 
     public String getCode() {
@@ -91,5 +94,13 @@ public class ProductModel implements Serializable {
 
     public void setType_code(String type_code) {
         this.type_code = type_code;
+    }
+
+    public String getFirm_code() {
+        return firm_code;
+    }
+
+    public void setFirm_code(String firm_code) {
+        this.firm_code = firm_code;
     }
 }
