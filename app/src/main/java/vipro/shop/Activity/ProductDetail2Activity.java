@@ -135,7 +135,7 @@ public class ProductDetail2Activity extends AppCompatActivity implements View.On
 
                 int checkAddCart = AddCart();
                 if (checkAddCart == 1) {
-                    Intent intent = new Intent(ProductDetailActivity.this, MainActivity.class);
+                    Intent intent = new Intent(ProductDetail2Activity.this, MainActivity.class);
                     intent.putExtra("checkBuyNow", true);
                     startActivity(intent);
                 }
@@ -185,7 +185,7 @@ public class ProductDetail2Activity extends AppCompatActivity implements View.On
     private void setRecyclerAdapter() {
 
         lstSimilarProducts = new ArrayList<>();
-        similarProductAdapter = new ProductOfTypeAdapter(this, R.layout.item_product_of_type, lstSimilarProducts);
+        similarProductAdapter = new ProductOfFirmAdapter(this, R.layout.item_product_of_type, lstSimilarProducts);
         recycleviewSimilarProduct.setLayoutManager(new GridLayoutManager(this,2));
         recycleviewSimilarProduct.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(), false));
         recycleviewSimilarProduct.setAdapter(similarProductAdapter);

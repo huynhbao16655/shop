@@ -9,7 +9,6 @@ public class Server {
     public static String urlProductsDiscounted=urlBase+"getProductsDiscounted.php";
     public static String urlProductsRecently=urlBase+"getProductsRecently.php";
     public static String urlProductsOfType=urlBase+"getProductOfType.php";
-
     public static String urlProductsOfFirm=urlBase+"getProductOfFirm.php";
     public static String urlBanner=urlBase+"getBanners.php";
     public static String urlSearch=urlBase+"search.php";
