@@ -50,7 +50,7 @@ public class RecentlyAdapter extends RecyclerView.Adapter<RecentlyAdapter.Recent
 
         ProductModel productModel=recentlyProductsList.get(position);
         Log.d("haha", "onBindViewHolder: "+productModel.getImage());
-        Picasso.get().load(Server.urlImage+productModel.getImage()).into(holder.recentlyImageView);
+        Picasso.get().load(Server.urlImageproduct+productModel.getImage()).into(holder.recentlyImageView);
         holder.recentlyName.setText(productModel.getName());
         if(productModel.getPrice_discounted()>0) {
             holder.productPriceSaleRecently.setText(Support.ConvertMoney(productModel.getPrice_discounted()));

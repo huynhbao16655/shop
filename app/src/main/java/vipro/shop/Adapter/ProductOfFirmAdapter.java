@@ -43,7 +43,7 @@ public class ProductOfFirmAdapter extends RecyclerView.Adapter<ProductOfFirmAdap
     @Override
     public void onBindViewHolder(@NonNull ViewProductOfFirm holder, int position) {
         ProductModel productModel=arrayList.get(position);
-        Picasso.get().load(Server.urlImage+productModel.getImage()).into(holder.imageProductOfFirm);
+        Picasso.get().load(Server.urlImageproduct+productModel.getImage()).into(holder.imageProductOfFirm);
         holder.nameProductOfFirm.setText(productModel.getName());
         if(productModel.getPrice_discounted()>0)
         {

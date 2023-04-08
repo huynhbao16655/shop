@@ -53,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             price = cart.getProductModel().getPrice_discounted();
         else
             price = cart.getProductModel().getPrice();
-        Picasso.get().load(Server.urlImage + cart.getProductModel().getImage()).into(holder.image);
+        Picasso.get().load(Server.urlImageproduct + cart.getProductModel().getImage()).into(holder.image);
         holder.quantity.setText(cart.getQuantity() + "");
         holder.subtotal.setText(Support.ConvertMoney(cart.getQuantity() * price));
         holder.price.setText(Support.ConvertMoney(price));

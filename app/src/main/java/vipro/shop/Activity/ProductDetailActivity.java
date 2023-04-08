@@ -82,7 +82,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
     private void loadDataProduct() {
         productModel = (ProductModel) getIntent().getSerializableExtra("productDetail");
-        Picasso.get().load(Server.urlImage + productModel.getImage()).into(imageProductDetail);
+        Picasso.get().load(Server.urlImageproduct + productModel.getImage()).into(imageProductDetail);
         nameProductDetail.setText(productModel.getName());
         descriptionProdcutDetail.setText(productModel.getDescription());
         if (productModel.getPrice_discounted() > 0) {

@@ -4,6 +4,11 @@ public class Server {
     public static String urlBase="http://103.200.23.188/~btcomput/service1/";
 
     public static String urlImage=urlBase+"assets/hinhanh/";
+    public static String urlImageuser=urlBase+"public/uploads/AVTUSER/";
+
+    public static String urlImagelk=urlBase+"public/uploads/LOAILK/";
+    public static String urlImageproduct=urlBase+"public/uploads/product/";
+    public static String urlImagehang=urlBase+"public/uploads/HANG/";
     public static String urlTypeProduct=urlBase+"getTypeProducts.php";
     public static String urlFirmProduct=urlBase+"getFirmProducts.php";
     public static String urlProductsDiscounted=urlBase+"getProductsDiscounted.php";

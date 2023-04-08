@@ -109,7 +109,7 @@ public class UpdateCustomerFragment extends Fragment implements View.OnClickList
             public void onResponse(JSONObject response) {
                 try {
                     image = response.getString("image");
-                    Picasso.get().load(Server.urlImage + image).into(imageCustomer);
+                    Picasso.get().load(Server.urlImageuser + image).into(imageCustomer);
                     name_updateCustomer.setText(response.getString("name"));
                     address_updateCustomer.setText(response.getString("address"));
                     phone_updateCustomer.setText(0 + response.getString("phone"));

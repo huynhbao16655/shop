@@ -44,7 +44,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         CategoryModel categoryModel = categoryList.get(position);
-        Picasso.get().load(Server.urlImage + categoryModel.getImage()).into(holder.categoryImage);
+        Picasso.get().load(Server.urlImagelk + categoryModel.getImage()).into(holder.categoryImage);
         holder.categoryName.setText(categoryModel.getName());
         holder.itemView.setOnClickListener(view -> {
             Intent intent=new Intent(context, ProductsOfTypeActivity.class);

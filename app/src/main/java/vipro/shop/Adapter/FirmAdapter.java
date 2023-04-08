@@ -45,7 +45,7 @@ public class FirmAdapter extends RecyclerView.Adapter<FirmAdapter.FirmViewHolder
     @Override
     public void onBindViewHolder(@NonNull FirmViewHolder holder, int position) {
         FirmModel firmModel = firmList.get(position);
-        Picasso.get().load(Server.urlImage + firmModel.getImage()).into(holder.firmImage);
+        Picasso.get().load(Server.urlImagehang + firmModel.getImage()).into(holder.firmImage);
         holder.firmName.setText(firmModel.getName());
         holder.itemView.setOnClickListener(view -> {
             Intent intent=new Intent(context, ProductsOfFirmActivity.class);

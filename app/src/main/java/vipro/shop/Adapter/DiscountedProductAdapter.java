@@ -46,7 +46,7 @@ public class DiscountedProductAdapter extends RecyclerView.Adapter<DiscountedPro
     @Override
     public void onBindViewHolder(@NonNull DiscountedProductViewHolder holder, int position) {
         ProductModel productModel=discountedProductsList.get(position);
-        Picasso.get().load(Server.urlImage+productModel.getImage()).into(holder.discountImageView);
+        Picasso.get().load(Server.urlImageproduct+productModel.getImage()).into(holder.discountImageView);
         holder.discountName.setText(productModel.getName());
         holder.discountPrice.setText(Support.ConvertMoney(productModel.getPrice()));
         holder.discountSalePrice.setText(Support.ConvertMoney(productModel.getPrice_discounted()));
